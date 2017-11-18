@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package bdproy2;
+package Interfaz;
 
 /**
  *
@@ -15,8 +15,8 @@ public class BDProy2 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
-        // Esto solo es una prueba hecha por Arturo 
+        Principal Inicio = new Principal();
+        Inicio.setVisible(true);
     }
     
 }
