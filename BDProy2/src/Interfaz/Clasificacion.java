@@ -28,7 +28,7 @@ public class Clasificacion extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
     }
     public void listarDatos(){
-        confede = db.getListarCursos();
+        confede = db.getListarConfederaciones();
         DefaultTableModel tb = (DefaultTableModel)jTable1.getModel();
         for(Confederacion cf: confede){
             tb.addRow(new Object[]{cf.getCodigoconfederacion(),cf.getNombre()});
