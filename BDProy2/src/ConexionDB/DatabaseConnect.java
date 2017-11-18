@@ -20,7 +20,6 @@ public class DatabaseConnect {
   public static Connection getConnection() {
       
         try {
-          
             Class.forName("oracle.jdbc.driver.OracleDriver");  //DRIVER DE SQL DEVELOPER
             String myDB = "jdbc:oracle:thin:@localhost:1521:XE";//URL DE SQL DEVELOPER
             

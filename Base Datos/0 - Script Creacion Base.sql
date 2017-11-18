@@ -28,9 +28,9 @@ CREATE TABLE Equipo(
  
 CREATE TABLE Persona(
     numeroPasaporte INT NOT NULL,
-    nombre varchar(15) NOT NULL,
-	apellido1 varchar(15) NOT NULL,
-    apellido2 varchar(15) NOT NULL,
+    nombre varchar(50) NOT NULL,
+	apellido1 varchar(50) NOT NULL,
+    apellido2 varchar(50) NOT NULL,
 	fechaNacimiento DATE NOT NULL, 
     codigoPais varchar(3) NOT NULL,
     
@@ -46,7 +46,7 @@ CREATE TABLE Entrenador(
     FOREIGN KEY (numeroPasaporte) REFERENCES Persona (numeroPasaporte)
  );  
  
- CREATE TABLE Arbrito(
+ CREATE TABLE Arbitro(
     numeroPasaporte INT NOT NULL,
     fechaInicio date NOT NULL,
     
@@ -91,10 +91,10 @@ CREATE TABLE Entrenador(
  
 CREATE TABLE Disputa(
     numeroPartido int not null,
-    nombreSede varchar(50) not null,
-    PRIMARY KEY (numeroPartido,nombreSede),
+    nombreEstadio varchar(50) not null,
+    PRIMARY KEY (numeroPartido,nombreEstadio),
     FOREIGN KEY (numeroPartido) REFERENCES Partido (numeroPartido),
-	FOREIGN KEY (nombreSede) REFERENCES Sedes (nombreSede)
+	FOREIGN KEY (nombreEstadio) REFERENCES Sedes (nombreEstadio)
  );
  
  CREATE TABLE Estadisticas(
