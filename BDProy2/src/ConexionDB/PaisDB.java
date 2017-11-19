@@ -5,7 +5,7 @@
  */
 package ConexionDB;
 
-import Clases.Principales.Confederacion;
+import Clases.Principales.Pais;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,18 +16,19 @@ import java.util.ArrayList;
  *
  * @author M Express
  */
-public class ConfederacionDB {
-    public ArrayList<Confederacion> getListarConfederaciones() {
-        ArrayList<Confederacion> confederacion = new ArrayList<>();
+public class PaisDB {
+    
+    public ArrayList<Pais> getListaPais() {
+        ArrayList<Pais> pais = new ArrayList<>();
         try {
             Connection cnx = DatabaseConnect.getConnection();
             Statement st = cnx.createStatement();
-            ResultSet rs = st.executeQuery("SELECT CODIGOCONFEDERACION, NOMBRE FROM CONFEDERACION");
+            ResultSet rs = st.executeQuery("SELECT CODIGOPAIS, NOMBRE FROM PAIS");
             while (rs.next()) {
-                Confederacion conf = new Confederacion();
-                conf.setCodigoconfederacion(rs.getString("CODIGOCONFEDERACION"));
+                Pais conf = new Pais();
+                conf.setCodigopais(rs.getString("CODIGOPAIS"));
                 conf.setNombre(rs.getString("NOMBRE"));
-                confederacion.add(conf);
+                pais.add(conf);
 
             }
 
@@ -36,19 +37,20 @@ public class ConfederacionDB {
             System.out.println("Error en Listado");
         }
 
-        return confederacion;
+        return pais;
     }
-    //Obtener una confederacion
-    public Confederacion getConfederacion(String codConfederacion) {
-        Confederacion conf = null;
+    
+    public Pais getPais(String codPais) {
+        ConfederacionDB cf = new ConfederacionDB();
+        Pais conf = null;
         try {
             Connection cnx = DatabaseConnect.getConnection();
             Statement st = cnx.createStatement();
-            ResultSet rs = st.executeQuery("SELECT CODIGOCONFEDERACION,NOMBRE"
-                    + "   FROM CONFEDERACION WHERE CODIGOCONFEDERACION= '" + codConfederacion + "'");
+            ResultSet rs = st.executeQuery("SELECT CODIGOPAIS, NOMBRE "
+                    + "    FROM PAIS WHERE CODIGOPAIS= '" + codPais + "'");
             while (rs.next()) {
-                conf = new Confederacion();
-                conf.setCodigoconfederacion(rs.getString("CODIGOCONFEDERACION"));
+                conf = new Pais();
+                conf.setCodigopais(rs.getString("CodigoPais"));
                 conf.setNombre(rs.getString("NOMBRE"));
             }
 
@@ -60,14 +62,14 @@ public class ConfederacionDB {
     }
     //Insertar DATOS en la DB
 
-    public void InsertConfederacion(Confederacion confederacion) {
+    public void InsertPais(Pais pais) {
 
         try {
             Connection cnx = DatabaseConnect.getConnection();
-            PreparedStatement pst = cnx.prepareStatement("INSERT INTO CONFEDERACION(CODIGOCONFEDERACION, NOMBRE)"
+            PreparedStatement pst = cnx.prepareStatement("INSERT INTO PAIS(CODIGOPAIS, NOMBRE)"
                     + " VALUES(?,?)");
-            pst.setString(1, confederacion.getCodigoconfederacion());
-            pst.setString(2, confederacion.getNombre());
+            pst.setString(1, pais.getCodigopais());
+            pst.setString(2, pais.getNombre());
             pst.executeQuery();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
@@ -76,15 +78,14 @@ public class ConfederacionDB {
 
     }
 
-    public void UpdateConfederacion(Confederacion conf) {
+    public void UpdatePais(Pais pais) {
 
         try {
             Connection cnx = DatabaseConnect.getConnection();
-            PreparedStatement pst = cnx.prepareStatement(" UPDATE  CONFEDERACION SET "
-                    + " NOMBRE=? WHERE CODIGOCONFEDERACION=? ");
-            pst.setString(1, conf.getCodigoconfederacion());
-            pst.setString(2, conf.getNombre());
-
+            PreparedStatement pst = cnx.prepareStatement(" UPDATE  PAIS SET "
+                    + " NOMBRE=? WHERE CODIGOPAIS=? ");
+            pst.setString(1, pais.getCodigopais());
+            pst.setString(2, pais.getNombre());
             pst.executeQuery();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
@@ -94,16 +95,16 @@ public class ConfederacionDB {
     }
 //cod para Eliminar
 
-    public void DeleteConfederacion(String cod) {
+    public void DeletePais(String cod) {
         try {
             Connection cnx = DatabaseConnect.getConnection();
-            PreparedStatement pst = cnx.prepareStatement("DELETE FROM CONFEDERACION "
-                    + " WHERE CODIGOCONFEDERACION=?");
+            PreparedStatement pst = cnx.prepareStatement("DELETE FROM PAIS "
+                    + " WHERE CODIGOPAIS=?");
             pst.setString(1, cod);
             pst.executeQuery();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
             System.out.println("Error en Eliminar datos");
         }
-}
+    }
 }

@@ -5,29 +5,32 @@
  */
 package ConexionDB;
 
-import Clases.Principales.Confederacion;
+import Clases.Principales.Arbrito;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 /**
  *
  * @author M Express
  */
-public class ConfederacionDB {
-    public ArrayList<Confederacion> getListarConfederaciones() {
-        ArrayList<Confederacion> confederacion = new ArrayList<>();
+public class ArbitroDB {
+    public ArrayList<Arbrito> getListaArbitros() {
+        ArrayList<Arbrito> arbitro = new ArrayList<>();
+        PersonaDB pdb = new PersonaDB();
         try {
             Connection cnx = DatabaseConnect.getConnection();
             Statement st = cnx.createStatement();
-            ResultSet rs = st.executeQuery("SELECT CODIGOCONFEDERACION, NOMBRE FROM CONFEDERACION");
+            ResultSet rs = st.executeQuery("SELECT NUMEROPASAPORTE, FECHAINICIO FROM ARBRITO");
             while (rs.next()) {
-                Confederacion conf = new Confederacion();
-                conf.setCodigoconfederacion(rs.getString("CODIGOCONFEDERACION"));
-                conf.setNombre(rs.getString("NOMBRE"));
-                confederacion.add(conf);
+                Arbrito conf = new Arbrito();
+                conf.setNumeropasaporte(rs.getBigDecimal("NUMEROPASAPORTE"));
+                conf.setFechainicio(rs.getDate("FECHAINICIO"));
+                conf.setPersona(pdb.getPersona(rs.getString("NUMEROPASAPORTE")));
+                arbitro.add(conf);
 
             }
 
@@ -36,20 +39,23 @@ public class ConfederacionDB {
             System.out.println("Error en Listado");
         }
 
-        return confederacion;
+        return arbitro;
     }
-    //Obtener una confederacion
-    public Confederacion getConfederacion(String codConfederacion) {
-        Confederacion conf = null;
+    
+    //Obtener Arbitro
+    public Arbrito getArbitro(String numPasaporte) {
+        Arbrito conf = null;
+        PersonaDB pdb = new PersonaDB();
         try {
             Connection cnx = DatabaseConnect.getConnection();
             Statement st = cnx.createStatement();
-            ResultSet rs = st.executeQuery("SELECT CODIGOCONFEDERACION,NOMBRE"
-                    + "   FROM CONFEDERACION WHERE CODIGOCONFEDERACION= '" + codConfederacion + "'");
+            ResultSet rs = st.executeQuery("SELECT NUMEROPASAPORTE, FECHAINICIO"
+                    + "    FROM ARBRITO WHERE NUMEROPASAPORTE= '" + numPasaporte + "'");
             while (rs.next()) {
-                conf = new Confederacion();
-                conf.setCodigoconfederacion(rs.getString("CODIGOCONFEDERACION"));
-                conf.setNombre(rs.getString("NOMBRE"));
+                conf = new Arbrito();
+                conf.setNumeropasaporte(rs.getBigDecimal("NUMEROPASAPORTE"));
+                conf.setFechainicio(rs.getDate("FECHAINICIO"));
+                conf.setPersona(pdb.getPersona(rs.getString("NUMEROPASAPORTE")));
             }
 
         } catch (SQLException ex) {
@@ -58,16 +64,17 @@ public class ConfederacionDB {
         }
         return conf;
     }
+    
     //Insertar DATOS en la DB
 
-    public void InsertConfederacion(Confederacion confederacion) {
+    public void InsertArbitros(Arbrito arbitro) {
 
         try {
             Connection cnx = DatabaseConnect.getConnection();
-            PreparedStatement pst = cnx.prepareStatement("INSERT INTO CONFEDERACION(CODIGOCONFEDERACION, NOMBRE)"
+            PreparedStatement pst = cnx.prepareStatement("INSERT INTO ARBRITO(NUMEROPASAPORTE, FECHAINICIO)"
                     + " VALUES(?,?)");
-            pst.setString(1, confederacion.getCodigoconfederacion());
-            pst.setString(2, confederacion.getNombre());
+            pst.setBigDecimal(1, arbitro.getNumeropasaporte());
+            pst.setDate(2, (java.sql.Date) arbitro.getFechainicio());
             pst.executeQuery();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
@@ -76,14 +83,14 @@ public class ConfederacionDB {
 
     }
 
-    public void UpdateConfederacion(Confederacion conf) {
+    public void UpdateArbitro(Arbrito arbitro) {
 
         try {
             Connection cnx = DatabaseConnect.getConnection();
-            PreparedStatement pst = cnx.prepareStatement(" UPDATE  CONFEDERACION SET "
-                    + " NOMBRE=? WHERE CODIGOCONFEDERACION=? ");
-            pst.setString(1, conf.getCodigoconfederacion());
-            pst.setString(2, conf.getNombre());
+            PreparedStatement pst = cnx.prepareStatement(" UPDATE  ARBRITO SET "
+                    + " FECHAINICIO=? WHERE NUMEROPASAPORTE=? ");
+            pst.setBigDecimal(1, arbitro.getNumeropasaporte());
+            pst.setDate(2, (java.sql.Date) arbitro.getFechainicio());
 
             pst.executeQuery();
         } catch (SQLException ex) {
@@ -94,16 +101,16 @@ public class ConfederacionDB {
     }
 //cod para Eliminar
 
-    public void DeleteConfederacion(String cod) {
+    public void DeleteArbitro(String cod) {
         try {
             Connection cnx = DatabaseConnect.getConnection();
-            PreparedStatement pst = cnx.prepareStatement("DELETE FROM CONFEDERACION "
-                    + " WHERE CODIGOCONFEDERACION=?");
+            PreparedStatement pst = cnx.prepareStatement("DELETE FROM ARBRITO "
+                    + " WHERE NUMEROPASAPORTE=?");
             pst.setString(1, cod);
             pst.executeQuery();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
             System.out.println("Error en Eliminar datos");
         }
-}
+    }
 }
