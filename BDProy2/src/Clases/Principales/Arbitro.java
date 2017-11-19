@@ -26,13 +26,13 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author M Express
  */
 @Entity
-@Table(name = "ARBRITO")
+@Table(name = "ARBITRO")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Arbrito.findAll", query = "SELECT a FROM Arbrito a")
-    , @NamedQuery(name = "Arbrito.findByNumeropasaporte", query = "SELECT a FROM Arbrito a WHERE a.numeropasaporte = :numeropasaporte")
-    , @NamedQuery(name = "Arbrito.findByFechainicio", query = "SELECT a FROM Arbrito a WHERE a.fechainicio = :fechainicio")})
-public class Arbrito implements Serializable {
+    @NamedQuery(name = "Arbitro.findAll", query = "SELECT a FROM Arbitro a")
+    , @NamedQuery(name = "Arbitro.findByNumeropasaporte", query = "SELECT a FROM Arbitro a WHERE a.numeropasaporte = :numeropasaporte")
+    , @NamedQuery(name = "Arbitro.findByFechainicio", query = "SELECT a FROM Arbitro a WHERE a.fechainicio = :fechainicio")})
+public class Arbitro implements Serializable {
 
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
@@ -48,14 +48,14 @@ public class Arbrito implements Serializable {
     @OneToOne(optional = false)
     private Persona persona;
 
-    public Arbrito() {
+    public Arbitro() {
     }
 
-    public Arbrito(BigDecimal numeropasaporte) {
+    public Arbitro(BigDecimal numeropasaporte) {
         this.numeropasaporte = numeropasaporte;
     }
 
-    public Arbrito(BigDecimal numeropasaporte, Date fechainicio) {
+    public Arbitro(BigDecimal numeropasaporte, Date fechainicio) {
         this.numeropasaporte = numeropasaporte;
         this.fechainicio = fechainicio;
     }
@@ -94,10 +94,10 @@ public class Arbrito implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Arbrito)) {
+        if (!(object instanceof Arbitro)) {
             return false;
         }
-        Arbrito other = (Arbrito) object;
+        Arbitro other = (Arbitro) object;
         if ((this.numeropasaporte == null && other.numeropasaporte != null) || (this.numeropasaporte != null && !this.numeropasaporte.equals(other.numeropasaporte))) {
             return false;
         }
@@ -106,7 +106,7 @@ public class Arbrito implements Serializable {
 
     @Override
     public String toString() {
-        return "Clases.Principales.Arbrito[ numeropasaporte=" + numeropasaporte + " ]";
+        return "Clases.Principales.Arbitro[ numeropasaporte=" + numeropasaporte + " ]";
     }
     
 }

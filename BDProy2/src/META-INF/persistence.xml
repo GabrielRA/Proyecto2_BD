@@ -15,6 +15,7 @@
     <class>Clases.Principales.Jugador</class>
     <class>Clases.Principales.Arbrito</class>
     <class>Clases.Principales.Pais</class>
+    <class>Clases.Principales.Arbitro</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@localhost:1521:XE"/>
       <property name="javax.persistence.jdbc.user" value="bdproy2"/>

@@ -5,18 +5,41 @@
  */
 package Interfaz;
 
+import Clases.Principales.Confederacion;
+import Clases.Principales.Equipo;
+import ConexionDB.ConfederacionDB;
+import ConexionDB.EquipoDB;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author M Express
  */
 public class ActualizarEquipo extends javax.swing.JFrame {
 
+    Equipo equip;
+    EquipoDB db = new EquipoDB();
     /**
      * Creates new form ActualizarEquipo
      */
     public ActualizarEquipo() {
         initComponents();
         this.setLocationRelativeTo(null);
+    }
+    public void listarDatos(String codPais){
+        equip = db.getEquipo(codPais);
+        DefaultTableModel tb = (DefaultTableModel)tablaDatos.getModel();
+        tb.addRow(new Object[]{equip.getCodigopais(),equip.getNombre(),equip.getCodigoconfederacion().getCodigoconfederacion(),equip.getGrupo()});
+        
+    }
+    
+    
+    public void limpiarFormulario(){
+        DefaultTableModel tb = (DefaultTableModel)tablaDatos.getModel();
+        for(int i=tb.getRowCount()-1;i>=0;i--)
+            tb.removeRow(i);
     }
 
     /**
@@ -31,10 +54,10 @@ public class ActualizarEquipo extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        tablaDatos = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        txtEquipo = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -47,24 +70,29 @@ public class ActualizarEquipo extends javax.swing.JFrame {
 
         jLabel1.setText("Actualizar Equipos");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaDatos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Codigo Pais", "Nombre", "Codigo Confederacion", "Grupo"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jScrollPane1.setViewportView(tablaDatos);
 
         jButton2.setText("Seleccionar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Actualizar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -76,20 +104,23 @@ public class ActualizarEquipo extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(252, 252, 252)
-                        .addComponent(jLabel1))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(252, 252, 252)
+                                .addComponent(jLabel1))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(106, 106, 106)
+                                .addComponent(txtEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(142, 142, 142)
+                                .addComponent(jButton2))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(238, 238, 238)
+                                .addComponent(jButton3)))
+                        .addGap(0, 131, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(78, 78, 78)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(130, 130, 130)
-                        .addComponent(jButton2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(59, 59, 59)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(238, 238, 238)
-                        .addComponent(jButton3)))
-                .addContainerGap(59, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addComponent(jScrollPane1)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -98,11 +129,11 @@ public class ActualizarEquipo extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
+                    .addComponent(jButton2)
+                    .addComponent(txtEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
                 .addComponent(jButton3)
                 .addGap(13, 13, 13)
                 .addComponent(jButton1))
@@ -116,6 +147,34 @@ public class ActualizarEquipo extends javax.swing.JFrame {
         vCrud.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        String cod = txtEquipo.getText();
+        limpiarFormulario();
+        listarDatos(cod);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        DefaultTableModel tb = (DefaultTableModel)tablaDatos.getModel();
+        if (tb.getRowCount()<1) {
+            
+            JOptionPane.showMessageDialog(this, "Busca Datos en la DB primero","Mensaje",JOptionPane.ERROR_MESSAGE);
+            
+        } else {
+            Equipo c = new Equipo();
+            ConfederacionDB conf = new ConfederacionDB();
+           
+            c.setCodigopais(String.valueOf(tb.getValueAt(0, 0)));
+            c.setNombre(String.valueOf(tb.getValueAt(0, 1)));
+            c.setCodigoconfederacion(conf.getConfederacion(String.valueOf(tb.getValueAt(0, 2))));
+            c.setGrupo(String.valueOf (tb.getValueAt(0, 3)));
+            db.UpdateEquipo(c);
+            limpiarFormulario();
+            listarDatos(c.getCodigopais());
+            JOptionPane.showMessageDialog(this, "Se actualizo el equipo","Mensaje",JOptionPane.OK_OPTION);
+        }
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -156,9 +215,9 @@ public class ActualizarEquipo extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tablaDatos;
+    private javax.swing.JTextField txtEquipo;
     // End of variables declaration//GEN-END:variables
 }

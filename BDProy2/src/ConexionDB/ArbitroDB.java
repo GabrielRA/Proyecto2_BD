@@ -5,7 +5,7 @@
  */
 package ConexionDB;
 
-import Clases.Principales.Arbrito;
+import Clases.Principales.Arbitro;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,15 +18,15 @@ import java.util.Date;
  * @author M Express
  */
 public class ArbitroDB {
-    public ArrayList<Arbrito> getListaArbitros() {
-        ArrayList<Arbrito> arbitro = new ArrayList<>();
+    public ArrayList<Arbitro> getListaArbitros() {
+        ArrayList<Arbitro> arbitro = new ArrayList<>();
         PersonaDB pdb = new PersonaDB();
         try {
             Connection cnx = DatabaseConnect.getConnection();
             Statement st = cnx.createStatement();
-            ResultSet rs = st.executeQuery("SELECT NUMEROPASAPORTE, FECHAINICIO FROM ARBRITO");
+            ResultSet rs = st.executeQuery("SELECT NUMEROPASAPORTE, FECHAINICIO FROM ARBITRO");
             while (rs.next()) {
-                Arbrito conf = new Arbrito();
+                Arbitro conf = new Arbitro();
                 conf.setNumeropasaporte(rs.getBigDecimal("NUMEROPASAPORTE"));
                 conf.setFechainicio(rs.getDate("FECHAINICIO"));
                 conf.setPersona(pdb.getPersona(rs.getString("NUMEROPASAPORTE")));
@@ -43,16 +43,16 @@ public class ArbitroDB {
     }
     
     //Obtener Arbitro
-    public Arbrito getArbitro(String numPasaporte) {
-        Arbrito conf = null;
+    public Arbitro getArbitro(String numPasaporte) {
+        Arbitro conf = null;
         PersonaDB pdb = new PersonaDB();
         try {
             Connection cnx = DatabaseConnect.getConnection();
             Statement st = cnx.createStatement();
             ResultSet rs = st.executeQuery("SELECT NUMEROPASAPORTE, FECHAINICIO"
-                    + "    FROM ARBRITO WHERE NUMEROPASAPORTE= '" + numPasaporte + "'");
+                    + "    FROM ARBITRO WHERE NUMEROPASAPORTE= '" + numPasaporte + "'");
             while (rs.next()) {
-                conf = new Arbrito();
+                conf = new Arbitro();
                 conf.setNumeropasaporte(rs.getBigDecimal("NUMEROPASAPORTE"));
                 conf.setFechainicio(rs.getDate("FECHAINICIO"));
                 conf.setPersona(pdb.getPersona(rs.getString("NUMEROPASAPORTE")));
@@ -67,11 +67,11 @@ public class ArbitroDB {
     
     //Insertar DATOS en la DB
 
-    public void InsertArbitros(Arbrito arbitro) {
+    public void InsertArbitros(Arbitro arbitro) {
 
         try {
             Connection cnx = DatabaseConnect.getConnection();
-            PreparedStatement pst = cnx.prepareStatement("INSERT INTO ARBRITO(NUMEROPASAPORTE, FECHAINICIO)"
+            PreparedStatement pst = cnx.prepareStatement("INSERT INTO ARBITRO(NUMEROPASAPORTE, FECHAINICIO)"
                     + " VALUES(?,?)");
             pst.setBigDecimal(1, arbitro.getNumeropasaporte());
             pst.setDate(2, (java.sql.Date) arbitro.getFechainicio());
@@ -83,11 +83,11 @@ public class ArbitroDB {
 
     }
 
-    public void UpdateArbitro(Arbrito arbitro) {
+    public void UpdateArbitro(Arbitro arbitro) {
 
         try {
             Connection cnx = DatabaseConnect.getConnection();
-            PreparedStatement pst = cnx.prepareStatement(" UPDATE  ARBRITO SET "
+            PreparedStatement pst = cnx.prepareStatement(" UPDATE  ARBITRO SET "
                     + " FECHAINICIO=? WHERE NUMEROPASAPORTE=? ");
             pst.setBigDecimal(1, arbitro.getNumeropasaporte());
             pst.setDate(2, (java.sql.Date) arbitro.getFechainicio());
@@ -104,7 +104,7 @@ public class ArbitroDB {
     public void DeleteArbitro(String cod) {
         try {
             Connection cnx = DatabaseConnect.getConnection();
-            PreparedStatement pst = cnx.prepareStatement("DELETE FROM ARBRITO "
+            PreparedStatement pst = cnx.prepareStatement("DELETE FROM ARBITRO "
                     + " WHERE NUMEROPASAPORTE=?");
             pst.setString(1, cod);
             pst.executeQuery();

@@ -188,44 +188,45 @@ public class CRUD extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        VerEquipos vEquipo = new VerEquipos();
-        vEquipo.setVisible(true);
+        Equipos vEq = new Equipos();
+        vEq.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        CrearEquipo vCEquipo = new CrearEquipo();
-        vCEquipo.setVisible(true);
+        CrearPartido vCPartido = new CrearPartido();
+        vCPartido.setVisible(true);
         this.setVisible(false);
+       
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-       CrearPartido vCPartido = new CrearPartido();
-       vCPartido.setVisible(true);
+       CrearEquipo vCEquipo = new CrearEquipo();
+       vCEquipo.setVisible(true);
        this.setVisible(false);
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        ActualizarEquipo vAEquipo = new ActualizarEquipo();
-        vAEquipo.setVisible(true);
+        ActualizarPartidos vAPartido = new ActualizarPartidos();
+        vAPartido.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        ActualizarPartidos vAPartido = new ActualizarPartidos();
-        vAPartido.setVisible(true);
+        ActualizarEquipo vAEquipo = new ActualizarEquipo();
+        vAEquipo.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        EliminarEquipo vEEquipo = new EliminarEquipo();
-        vEEquipo.setVisible(true);
+        EliminarPartido vEPartido = new EliminarPartido();
+        vEPartido.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        EliminarPartido vEPartido = new EliminarPartido();
-        vEPartido.setVisible(true);
+        EliminarEquipo vEEquipo = new EliminarEquipo();
+        vEEquipo.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton5ActionPerformed
 

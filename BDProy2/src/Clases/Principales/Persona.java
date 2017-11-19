@@ -75,8 +75,6 @@ public class Persona implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "persona")
     private Collection<Jugador> jugadorCollection;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "persona")
-    private Arbrito arbrito;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "persona")
     private Federativos federativos;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "numeropasaporte")
     private Collection<Supervisa> supervisaCollection;
@@ -87,6 +85,8 @@ public class Persona implements Serializable {
     private Pais codigopais;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "persona")
     private Entrenador entrenador;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "persona")
+    private Arbitro arbitro;
 
     public Persona() {
     }
@@ -197,14 +197,6 @@ public class Persona implements Serializable {
         this.jugadorCollection = jugadorCollection;
     }
 
-    public Arbrito getArbrito() {
-        return arbrito;
-    }
-
-    public void setArbrito(Arbrito arbrito) {
-        this.arbrito = arbrito;
-    }
-
     public Federativos getFederativos() {
         return federativos;
     }
@@ -245,6 +237,14 @@ public class Persona implements Serializable {
 
     public void setEntrenador(Entrenador entrenador) {
         this.entrenador = entrenador;
+    }
+
+    public Arbitro getArbitro() {
+        return arbitro;
+    }
+
+    public void setArbitro(Arbitro arbitro) {
+        this.arbitro = arbitro;
     }
 
     @Override
