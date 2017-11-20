@@ -88,9 +88,8 @@ public class EntrenadorDB {
             Connection cnx = DatabaseConnect.getConnection();
             PreparedStatement pst = cnx.prepareStatement(" UPDATE  ENTRENADOR SET "
                     + " FECHAINICIO=? WHERE NUMEROPASAPORTE=? ");
-            pst.setBigDecimal(1, entrenador.getNumeropasaporte());
-            pst.setDate(2, (java.sql.Date) entrenador.getFechainicio());
-
+            pst.setDate(1, (java.sql.Date) entrenador.getFechainicio());
+            pst.setBigDecimal(2, entrenador.getNumeropasaporte());
             pst.executeQuery();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());

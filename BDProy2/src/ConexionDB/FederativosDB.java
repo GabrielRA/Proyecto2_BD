@@ -92,9 +92,9 @@ public class FederativosDB {
             Connection cnx = DatabaseConnect.getConnection();
             PreparedStatement pst = cnx.prepareStatement(" UPDATE  FEDERATIVOS SET "
                     + " FECHAINICIO=?, PUESTO=? WHERE NUMEROPASAPORTE=? ");
-            pst.setBigDecimal(1, federativo.getNumeropasaporte());
-            pst.setDate(2, (java.sql.Date) federativo.getFechainicio());
-            pst.setString(3, federativo.getPuesto());
+            pst.setDate(1, (java.sql.Date) federativo.getFechainicio());
+            pst.setString(2, federativo.getPuesto());
+            pst.setBigDecimal(3, federativo.getNumeropasaporte());
             pst.executeQuery();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());

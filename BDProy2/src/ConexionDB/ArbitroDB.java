@@ -89,9 +89,9 @@ public class ArbitroDB {
             Connection cnx = DatabaseConnect.getConnection();
             PreparedStatement pst = cnx.prepareStatement(" UPDATE  ARBITRO SET "
                     + " FECHAINICIO=? WHERE NUMEROPASAPORTE=? ");
-            pst.setBigDecimal(1, arbitro.getNumeropasaporte());
-            pst.setDate(2, (java.sql.Date) arbitro.getFechainicio());
-
+            
+            pst.setDate(1, (java.sql.Date) arbitro.getFechainicio());
+            pst.setBigDecimal(2, arbitro.getNumeropasaporte());
             pst.executeQuery();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());

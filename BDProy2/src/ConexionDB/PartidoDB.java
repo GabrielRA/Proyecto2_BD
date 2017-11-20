@@ -102,13 +102,13 @@ public class PartidoDB {
             Connection cnx = DatabaseConnect.getConnection();
             PreparedStatement pst = cnx.prepareStatement(" UPDATE  PARTIDO SET "
                     + " ETAPA=?, FECHA=?, HORA=?, CANTIDAD_AFICIONADOS=?, MIN_REPOSICION_TIEMPO1=?, MIN_REPOSICION_TIEMPO2=? WHERE NUMEROPARTIDO,=? ");
-            pst.setBigDecimal(1, part.getNumeropartido());
-            pst.setString(2, part.getEtapa());
-            pst.setDate(3, (java.sql.Date) part.getFecha());
-            pst.setDate(4, (java.sql.Date) part.getHora());
-            pst.setInt(5, part.getCantidadAficionados().intValue());
-            pst.setInt(6, part.getMinReposicionTiempo1().intValue());
-            pst.setInt(7, part.getMinReposicionTiempo2().intValue());
+            pst.setString(1, part.getEtapa());
+            pst.setDate(2, (java.sql.Date) part.getFecha());
+            pst.setDate(3, (java.sql.Date) part.getHora());
+            pst.setInt(4, part.getCantidadAficionados().intValue());
+            pst.setInt(5, part.getMinReposicionTiempo1().intValue());
+            pst.setInt(6, part.getMinReposicionTiempo2().intValue());
+            pst.setBigDecimal(7, part.getNumeropartido());
             pst.executeQuery();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());

@@ -92,9 +92,9 @@ public class SupervisaDB {
             Connection cnx = DatabaseConnect.getConnection();
             PreparedStatement pst = cnx.prepareStatement(" UPDATE SUPERVISA SET "
                     + " NUMEROPASAPORTE=?, TIPO=? WHERE NUMEROPARTIDO=? ");
-            pst.setBigDecimal(1, supv.getNumeropartido());
-            pst.setBigDecimal(2, supv.getNumeropasaporte().getNumeropasaporte());
-            pst.setString(3, supv.getTipo());
+            pst.setBigDecimal(1, supv.getNumeropasaporte().getNumeropasaporte());
+            pst.setString(2, supv.getTipo());
+            pst.setBigDecimal(3, supv.getNumeropartido());
             pst.executeQuery();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());

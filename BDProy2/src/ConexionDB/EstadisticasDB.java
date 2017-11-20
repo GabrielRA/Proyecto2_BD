@@ -94,10 +94,10 @@ public class EstadisticasDB {
             Connection cnx = DatabaseConnect.getConnection();
             PreparedStatement pst = cnx.prepareStatement(" UPDATE  ESTADISTICAS SET "
                     + " NUMEROPASAPORTE=? , MINUTO=? , TIPO=?  WHERE NUMEROPARTIDO=? ");
-            pst.setBigDecimal(1, estad.getNumeropartido());
-            pst.setBigDecimal(2, estad.getNumeropasaporte().getNumeropasaporte());
-            pst.setString(3, estad.getMinuto().toString());
-            pst.setString(4, estad.getTipo());
+            pst.setBigDecimal(1, estad.getNumeropasaporte().getNumeropasaporte());
+            pst.setString(2, estad.getMinuto().toString());
+            pst.setString(3, estad.getTipo());
+            pst.setBigDecimal(4, estad.getNumeropartido());
             pst.executeQuery();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());

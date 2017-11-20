@@ -95,7 +95,6 @@ public class JugadorDB {
                     + "  WHERE NUMEROPASAPORTE=? AND CAMISA=?");
             pst.setInt(1, jugador.getJugadorPK().getNumeropasaporte().intValue());
             pst.setInt(2, jugador.getJugadorPK().getCamisa().intValue());
-
             pst.executeQuery();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());

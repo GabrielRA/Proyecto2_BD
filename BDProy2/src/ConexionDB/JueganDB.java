@@ -95,7 +95,7 @@ public class JueganDB {
             PreparedStatement pst = cnx.prepareStatement(" UPDATE  JUEGAN SET "
                     + "WHERE NUMEROPARTIDO=? AND CODIGO_PAIS=?");
             pst.setBigDecimal(1, juega.getPartido().getNumeropartido());
-            pst.setString(2, juega.getJueganPK().getCodigoPais().toString(0));
+            pst.setString(2, juega.getJueganPK().getCodigoPais().toString());
             pst.executeQuery();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());

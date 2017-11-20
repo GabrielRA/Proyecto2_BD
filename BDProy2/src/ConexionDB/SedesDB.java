@@ -89,9 +89,9 @@ public class SedesDB {
             Connection cnx = DatabaseConnect.getConnection();
             PreparedStatement pst = cnx.prepareStatement(" UPDATE SEDES SET "
                     + " NOMBRESEDE=?, CAPACIDAD=? WHERE NOMBREESTADIO=? ");
-            pst.setString(1, sede.getNombreestadio());
-            pst.setString(2, sede.getNombresede());
-            pst.setInt(3, sede.getCapacidad().intValue());
+            pst.setString(1, sede.getNombresede());
+            pst.setInt(2, sede.getCapacidad().intValue());
+            pst.setString(3, sede.getNombreestadio());
             pst.executeQuery();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());

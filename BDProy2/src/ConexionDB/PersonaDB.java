@@ -99,12 +99,12 @@ public class PersonaDB {
             Connection cnx = DatabaseConnect.getConnection();
             PreparedStatement pst = cnx.prepareStatement(" UPDATE PERSONA SET "
                     + " NOMBRE=?, APELLIDO1=?, APELLIDO2=?, FECHANACIMIENTO=?, CODIGOPAIS=? WHERE NUMEROPASAPORTE=? ");
-            pst.setBigDecimal(1, person.getNumeropasaporte());
-            pst.setString(2, person.getNombre());
-            pst.setString(3, person.getApellido1());
-            pst.setString(4, person.getApellido2());
-            pst.setDate(5, (java.sql.Date) person.getFechanacimiento());
-            pst.setString(6, person.getCodigopais().getCodigopais());
+            pst.setString(1, person.getNombre());
+            pst.setString(2, person.getApellido1());
+            pst.setString(3, person.getApellido2());
+            pst.setDate(4, (java.sql.Date) person.getFechanacimiento());
+            pst.setString(5, person.getCodigopais().getCodigopais());
+            pst.setBigDecimal(6, person.getNumeropasaporte());
             pst.executeQuery();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());

@@ -84,8 +84,8 @@ public class PaisDB {
             Connection cnx = DatabaseConnect.getConnection();
             PreparedStatement pst = cnx.prepareStatement(" UPDATE  PAIS SET "
                     + " NOMBRE=? WHERE CODIGOPAIS=? ");
-            pst.setString(1, pais.getCodigopais());
-            pst.setString(2, pais.getNombre());
+            pst.setString(1, pais.getNombre());
+            pst.setString(2, pais.getCodigopais());
             pst.executeQuery();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());

@@ -82,8 +82,9 @@ public class ConfederacionDB {
             Connection cnx = DatabaseConnect.getConnection();
             PreparedStatement pst = cnx.prepareStatement(" UPDATE  CONFEDERACION SET "
                     + " NOMBRE=? WHERE CODIGOCONFEDERACION=? ");
-            pst.setString(1, conf.getCodigoconfederacion());
-            pst.setString(2, conf.getNombre());
+            pst.setString(1, conf.getNombre());
+            pst.setString(2, conf.getCodigoconfederacion());
+            
 
             pst.executeQuery();
         } catch (SQLException ex) {

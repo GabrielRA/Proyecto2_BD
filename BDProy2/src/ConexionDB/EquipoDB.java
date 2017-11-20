@@ -99,10 +99,10 @@ public class EquipoDB {
             Connection cnx = DatabaseConnect.getConnection();
             PreparedStatement pst = cnx.prepareStatement(" UPDATE  EQUIPO SET "
                     + " NOMBRE=? , CODIGOCONFEDERACION=? , GRUPO=?  WHERE CODIGOPAIS=? ");
-            pst.setString(4, equip.getCodigopais());
             pst.setString(1, equip.getNombre());
             pst.setString(2, equip.getCodigoconfederacion().getCodigoconfederacion());
             pst.setString(3, equip.getGrupo());
+            pst.setString(4, equip.getCodigopais());
             pst.executeQuery();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
