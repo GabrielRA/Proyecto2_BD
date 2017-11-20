@@ -67,7 +67,7 @@ create or replace procedure GrupClasi( grupo in Equipo.grupo%Type, p_cur out sys
 begin
    open p_cur for
    
-   select E.nombre , count( J.codigo_pais) "Goles" as partidos jugados
+   select E.nombre , count( J.codigo_pais) "PJ", as partidos jugados
    
    from Equipo E, Estadisticas ES, Juegan J 
    where E.codigopais = J.codigo_pais and J.numeropartido = ES.numeropartido 
@@ -84,3 +84,10 @@ begin
    where S.tipo = 'gol' and S.numeropasaporte = P.numeropasaporte and P.codigopais = E.codigopais
    order by E.nombre;
 end goleadores;
+
+/*************** Dicionario de datos***************/
+create or replace procedure DicionarioD( p_cur out sys_refcursor) AS
+begin      
+    open p_cur for
+    select * from user_tables;
+end DicionarioD;
