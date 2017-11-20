@@ -56,7 +56,10 @@ begin
   select p.nombre, E.tipo, E.minuto into nombre , p_tipo , p_minuto from Persona p, Estadisticas E  where E.numeropartido = p_numero_partido and E.numeroPasaporte = p.numeroPasaporte;
 end GolesTarjetas;
 
-
+/**Vista que regresa los numeros de partido**/
+CREATE OR REPLACE FORCE VIEW "Partidos" ("NUMEROPARTIDO") AS 
+  SELECT numeropartido
+  FROM partido;
 
 //*********************** Consultas C ****************************//
 
